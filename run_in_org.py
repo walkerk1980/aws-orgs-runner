@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# The purpose of this script is to create a specific API Call
+# The purpose of this script is to run a specific API Call
 # that does not require any arguments in every Organizations
 # Member Account across all supported Regions.
 # Note: you must run this script in an Organizations Master Account
