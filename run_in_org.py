@@ -70,10 +70,12 @@ for account in account_ids:
                                          )
             for region in service_regions:
                 print('Running : ' + region)
+                # TODO: Action is not paginated, add pagination logic
                 action = getattr(member_client, ACTION_NAME)
             print(action())
         if account == master_account_id:
             master_config = boto3.client('config')
+            # TODO: Action is not paginated, add pagination logic
             for region in service_regions:
                 print('Running : ' + region)
                 action = getattr(member_client, ACTION_NAME)
