@@ -71,11 +71,13 @@ for account in account_ids:
             for region in service_regions:
                 print('Running : ' + region)
                 # TODO: Action is not paginated, add pagination logic
+                # if action does not support pagination continue as normal
                 action = getattr(member_client, ACTION_NAME)
             print(action())
         if account == master_account_id:
             master_client = boto3.client(SERVICE_NAME)
             # TODO: Action is not paginated, add pagination logic
+            # if action does not support pagination continue as normal
             for region in service_regions:
                 print('Running : ' + region)
                 action = getattr(master_client, ACTION_NAME)
