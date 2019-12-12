@@ -78,7 +78,7 @@ for account in account_ids:
             # TODO: Action is not paginated, add pagination logic
             for region in service_regions:
                 print('Running : ' + region)
-                action = getattr(member_client, ACTION_NAME)
+                action = getattr(master_client, ACTION_NAME)
             print(action())
     except Exception as e:
         print(e)
