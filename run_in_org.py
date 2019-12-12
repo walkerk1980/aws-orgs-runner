@@ -61,7 +61,7 @@ for account in account_ids:
         if account not in [EXCLUDED_ACCOUNT_IDS, master_account_id]:
             credentials = sts.assume_role(
                 RoleArn=account_orgs_role_arn,
-                RoleSessionName='ConfigAggregatorScript',
+                RoleSessionName='RunInOrgScript',
             )['Credentials']
             member_client = boto3.client(SERVICE_NAME,
                                          aws_access_key_id=credentials['AccessKeyId'],
@@ -74,7 +74,7 @@ for account in account_ids:
                 action = getattr(member_client, ACTION_NAME)
             print(action())
         if account == master_account_id:
-            master_config = boto3.client('config')
+            master_client = boto3.client(SERVICE_NAME)
             # TODO: Action is not paginated, add pagination logic
             for region in service_regions:
                 print('Running : ' + region)
