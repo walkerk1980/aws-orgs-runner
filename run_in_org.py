@@ -63,23 +63,25 @@ for account in account_ids:
                 RoleArn=account_orgs_role_arn,
                 RoleSessionName='RunInOrgScript',
             )['Credentials']
-            member_client = boto3.client(SERVICE_NAME,
+            member_session = boto3.Session(
                                          aws_access_key_id=credentials['AccessKeyId'],
                                          aws_secret_access_key=credentials['SecretAccessKey'],
                                          aws_session_token=credentials['SessionToken'],
                                          )
             for region in service_regions:
+                member_client = member_session.client(SERVICE_NAME, region_name=region)
                 print('Running : ' + region)
                 # TODO: Action is not paginated, add pagination logic
                 # if action does not support pagination continue as normal
                 action = getattr(member_client, ACTION_NAME)
             print(action())
         if account == master_account_id:
-            master_client = boto3.client(SERVICE_NAME)
+            master_session = boto3.Session()
             # TODO: Action is not paginated, add pagination logic
             # if action does not support pagination continue as normal
             for region in service_regions:
                 print('Running : ' + region)
+                master_client = master_session.client(SERVICE_NAME, region_name=region)
                 action = getattr(master_client, ACTION_NAME)
             print(action())
     except Exception as e:
