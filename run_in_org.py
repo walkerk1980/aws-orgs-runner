@@ -22,7 +22,8 @@ EXCLUDED_ACCOUNT_IDS = ['720840927657', '414899279353', '946508719051']
 
 # list of regions to run script in
 service_regions=boto3.session.Session().get_available_regions(SERVICE_NAME)
-# disable above and set manually if service doesn't support all the regions that EC2 does
+# disable above and set manually if specific action 
+# doesn't support all the regions that the Service does
 # uncomment the next 3 lines to set regions manually
 # regions = 'ap-south-1 ap-northeast-2 ap-southeast-1 ap-southeast-2 ap-northeast-1 ca-central-1 \
 # eu-central-1 eu-west-1 eu-west-2 eu-west-3 sa-east-1 us-east-1 us-east-2 us-west-1 us-west-2'
